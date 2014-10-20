@@ -1,0 +1,5 @@
+applications:
+  name: leeroyjenckinswashere_putyourapplicationname
+  command: node server.js
+  path: .
+  memory: 128M
