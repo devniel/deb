@@ -3,7 +3,7 @@
  * del framework Express 4
  *
  * @author  devnieL
- * 
+ *
  */
 
 var express         = require('express');
@@ -11,17 +11,17 @@ var logger          = require('morgan');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var app             = express();
-var flash 		    = require('connect-flash');
+var flash 		    	= require('connect-flash');
 var helpers         = require('view-helpers');
 var swig            = require('swig');
 var session         = require('express-session')
-var MongoStore      = require('connect-mongo')(session);
-var credentials          = require("./credentials")[process.env.NODE_ENV || 'development'];
+//var MongoStore      = require('connect-mongo')(session);
+var credentials     = require("./credentials")[process.env.NODE_ENV || 'development'];
 var multer          = require('multer');
 var errorHandler    = require('errorhandler');
-var favicon = require('serve-favicon');
-var compress = require('compression');
-var cookieParser = require('cookie-parser')
+var favicon 				= require('serve-favicon');
+var compress 				= require('compression');
+var cookieParser 		= require('cookie-parser')
 
 module.exports = function(app, i18n) {
 
@@ -33,19 +33,19 @@ module.exports = function(app, i18n) {
 	Express Configuration
 	=========================================*/
 
-    app.set('showStackError', true);    
-   
+    app.set('showStackError', true);
+
     //Prettify HTML
     // ES: Originalmente Express retorna los archivos html sin espacios
     // ni saltos de línea, con esta configuración se retorna un HTML con un formato
     // mejor, ojo que solo a nivel de código fuente, no tiene nada que ver con
     // lo que verá el usuario final.
-    // 
+    //
     app.locals.pretty = true;
 
     // ES : Todas las variables guardadas como propiedades de app.locals, pueden ser después
-    // accedidas en las vistas con etiquetas especiales (<%= errors[0] %>), usualmente se 
-    // usa para enviar mensajes de error al usuario. 
+    // accedidas en las vistas con etiquetas especiales (<%= errors[0] %>), usualmente se
+    // usa para enviar mensajes de error al usuario.
     app.locals.errors = {};
     app.locals.message = {};
 
@@ -67,18 +67,20 @@ module.exports = function(app, i18n) {
     // log every request to the console
     // ES : Utilitario de desarrollo para mostrar las solicitudes realizadas
     // por los usuarios en la consola o log.
-	
+
     app.use(logger('dev'));
 
-    // simulate DELETE and PUT                  
+    // simulate DELETE and PUT
     // ES : Permite que los usuarios realicen
-    // solicitudes PUT o DELETE 
-    app.use(methodOverride());  
+    // solicitudes PUT o DELETE
+    app.use(methodOverride());
 
     app.use(session(
-        { 
+        {
             secret: 'devniel',
             cookie: { maxAge: null },
+						resave : false,
+						saveUninitialized : false
             /*store: new MongoStore({
                 url : credentials.mongodb.url,
             })*/
@@ -94,24 +96,22 @@ module.exports = function(app, i18n) {
 
     // use flash messages
     // ES : Necesario para el uso efectivo de app.locals.errors
-    // o app.locals.message 
+    // o app.locals.message
     app.use(flash());
 
-	// pull information from html in POST	
+		// pull information from html in POST
     // ES : Importante para gestionar nativamente
-    // solicitudes POST con datos en JSON o incluidos en URLs			
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
- 
-    app.use(multer());
-    
+    // solicitudes POST con datos en JSON o incluidos en URLs
+		app.use(bodyParser.json());
+		app.use(bodyParser.urlencoded({ extended: true }));
+
     // set the static files location /public/img will be /img for users
-    
+
     // ES : Establece una carpeta donde se accederan a los archivos públicos
     // tales como javascript, css, imagenes o fuentes de texto.
 
     app.use(express.static(rootDirectory + '/public'));
-	
+
     app.use(function(req, res, next) {
 
         // *express helper for i18n module
@@ -145,6 +145,6 @@ module.exports = function(app, i18n) {
     require("./routes")(app);
 
 
-    
+
 
 };

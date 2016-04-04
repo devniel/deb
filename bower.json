@@ -2,26 +2,8 @@
   "name": "deb",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.26",
-    "json3": "~3.2.4",
     "jquery": "~2.1.1",
-    "es5-shim": "~2.0.8",
-    "angular-resource": "~1.2.25",
-    "angular-cookies": "~1.2.25",
-    "angular-sanitize": "~1.2.25",
-    "angular-masonry": "~0.9.1",
-    "bootstrap": "~3.2.0",
-    "fontawesome": "~4.2.0",
-    "angular-route": "~1.2.25",
-    "angular-bootstrap": "~0.11.0",
-    "angular-scroll": "~0.6.1",
-    "angular-busy": "~4.1.0",
-    "angular-easyfb": "~1.1.0",
-    "angular-translate": "~2.4.1",
-    "animate.css": "~3.2.0"
+    "bootstrap": "~3.3.6"
   },
-  "devDependencies": {
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
-  }
+  "devDependencies": {}
 }
